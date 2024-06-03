@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: pedido
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/pedidodb
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      agregarProductoCircuitBreaker:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
