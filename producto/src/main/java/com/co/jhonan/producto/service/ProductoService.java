@@ -5,8 +5,9 @@ import java.util.List;
 import com.co.jhonan.producto.entity.Producto;
 
 public interface ProductoService {
-	List<Producto> obtenerTodosLosProductos();
-    Producto obtenerProductoPorId(String id);
-    Producto guardarProducto(Producto producto);
-    void eliminarProducto(String id);
+	
+	public List<Producto> obtenerTodosLosProductos();
+	public Producto obtenerProductoPorId(String id);
+	public Producto guardarProducto(Producto producto);
+	public void eliminarProducto(String id);
 }

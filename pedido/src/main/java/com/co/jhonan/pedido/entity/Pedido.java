@@ -10,6 +10,7 @@ public class Pedido {
 
 	@Id
     private String id;
+	private String idProducto;
     private List<String> productos;
     private List<Integer> cantidades;
     private String direccionEnvio;
@@ -20,6 +21,14 @@ public class Pedido {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(String idProducto) {
+    	this.idProducto = idProducto;
     }
 
     public List<String> getProductos() {

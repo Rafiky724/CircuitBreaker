@@ -2,20 +2,15 @@ server:
   port: 8080
 spring:
   application:
-    name: producto
-  data:
-    mongodb:
-      uri: mongodb://127.0.0.1:27017/productodb
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      agregarProductoCircuitBreaker:
-        registerHealthIndicator: true
-        ringBufferSizeInClosedState: 5
-        ringBufferSizeInHalfOpenState: 3
-        waitDurationInOpenState: 10s
-        failureRateThreshold: 50
-        eventConsumerBufferSize: 10
-
-      
+    name: Producto
+  datasource:
+    password: usuario123%J
+    url: jdbc:postgresql://localhost:5432/CircuitBreaker
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true

@@ -1,19 +1,50 @@
 server:
   port: 8081
+
 spring:
   application:
-    name: pedido
-  data:
-    mongodb:
-      uri: mongodb://127.0.0.1:27017/pedidodb
+    name: Pedido
+  datasource:
+    password: usuario123%J
+    url: jdbc:postgresql://localhost:5432/CircuitBreaker
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    
 resilience4j:
   circuitbreaker:
     instances:
-      agregarProductoCircuitBreaker:
+      productosCircuitBreaker:
         registerHealthIndicator: true
-        ringBufferSizeInClosedState: 5
-        ringBufferSizeInHalfOpenState: 3
-        waitDurationInOpenState: 10s
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        permittedNumberOfCallsInHalfOpenState: 2
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10000
         failureRateThreshold: 50
-        eventConsumerBufferSize: 10
+        recordExceptions:
+          - java.lang.Exception
+
+  timelimiter:
+    instances:
+      offersTimeLimiter:
+        timeoutDuration: 1s
+        cancelRunningFuture: true
+
